@@ -1,5 +1,18 @@
 # MyProjectApplication
 
+## 1.6.0
+
+`09-04-2023`
+
+- Build the location selecting UI
+
+## 1.5.0
+
+`08-04-2023`
+
+- Fetch the hourly forecast data.
+- Create a line chart.
+
 ## 1.4.0
 
 `08-04-2023`
