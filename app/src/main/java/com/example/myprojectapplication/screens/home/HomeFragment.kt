@@ -3,7 +3,6 @@ package com.example.myprojectapplication.screens.home
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.myprojectapplication.R
-import com.example.myprojectapplication.app.MyApp
 import com.example.myprojectapplication.app.ViewModelFactory
 import com.example.myprojectapplication.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.charts.LineChart
@@ -46,7 +44,7 @@ class HomeFragment : Fragment(), LocationPermissionUtils.LocationComponentListen
         savedInstanceState: Bundle?
     ): View? {
         binding =DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        viewModel = ViewModelProvider(this, ViewModelFactory(requireActivity().application as MyApp))[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(this))[HomeViewModel::class.java]
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -100,8 +98,7 @@ class HomeFragment : Fragment(), LocationPermissionUtils.LocationComponentListen
                 }
 
                 val dataSet = LineDataSet(entries, "Temperature")
-                dataSet.setColors(Color.WHITE)
-//            dataSet.valueTextColor = Color.WHITE
+                dataSet.setColors(Color.YELLOW)
                 dataSet.setDrawValues(false)
                 dataSet.setDrawCircles(false)
 
@@ -124,6 +121,9 @@ class HomeFragment : Fragment(), LocationPermissionUtils.LocationComponentListen
                     }
                 }
                 lineChartHourlyForecast.xAxis.valueFormatter = formatter
+                lineChartHourlyForecast.xAxis.textColor = Color.WHITE
+                lineChartHourlyForecast.axisLeft.textColor = Color.WHITE
+                lineChartHourlyForecast.axisRight.textColor = Color.WHITE
                 lineChartHourlyForecast.invalidate()
 
             }
@@ -153,7 +153,6 @@ class HomeFragment : Fragment(), LocationPermissionUtils.LocationComponentListen
     override fun onLocationFeatureEnable(isEnabled: Boolean) {
         if (isEnabled) {
             viewModel.getLocation()
-            Toast.makeText(context, "Permission is granted", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "Permission is denied", Toast.LENGTH_SHORT).show()
         }

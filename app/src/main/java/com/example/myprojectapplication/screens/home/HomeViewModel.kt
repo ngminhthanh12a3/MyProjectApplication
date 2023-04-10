@@ -1,7 +1,7 @@
 package com.example.myprojectapplication.screens.home
 
 import HourlyForecast
-import android.graphics.Color
+import android.annotation.SuppressLint
 import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,17 +10,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myprojectapplication.model.CurrentWeather
 import com.example.myprojectapplication.services.WeatherRestClient
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.utils.ColorTemplate
-import com.watasolutions.week8_permission.services.location.LocationClient
+import com.example.myprojectapplication.services.location.LocationClient
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class HomeViewModel(val location: LocationClient): ViewModel() {
+class HomeViewModel(val fragment: HomeFragment): ViewModel() {
 
+    private val location = LocationClient(fragment)
 
     private val  _currentWeather: MutableLiveData<CurrentWeather> = MutableLiveData()
     val currentWeather: LiveData<CurrentWeather>
@@ -34,6 +31,7 @@ class HomeViewModel(val location: LocationClient): ViewModel() {
     val locationEvent: LiveData<Location>
         get() = _locationEvent
 
+    @SuppressLint("SimpleDateFormat")
     fun getCurWeather() {
         viewModelScope.launch {
             val curWeatherResp = WeatherRestClient.getInstance()

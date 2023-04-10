@@ -4,16 +4,18 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.provider.Settings
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 
 class LocationPermissionUtils {
     private var listener: LocationComponentListener? = null
-
+    private val permissionId = 2
     interface LocationComponentListener {
         fun onLocationFeatureEnable(isEnabled: Boolean)
     }
@@ -34,28 +36,44 @@ class LocationPermissionUtils {
         this.listener = listener
     }
 
-    fun isLocationFeatureIsEnabled(context: Context): Boolean {
-        return isLocationPermissionIsAllow(context)
-    }
+//    fun isLocationFeatureIsEnabled(context: Context): Boolean {
+//        return isLocationPermissionIsAllow(context)
+//    }
 
     fun requestLocationPermission(
         fragment: Fragment,
     ) {
-        val context = fragment.requireContext()
-        if (isLocationPermissionIsAllow(context)) {
+        fragment.requireContext()
+        if (isLocationPermissionIsAllow(fragment)) {
             listener?.onLocationFeatureEnable(true)
         } else {
-            requestPermissionLauncher.launch(
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
+            fragment.activity?.let {
+                ActivityCompat.requestPermissions(
+                    it,
+                    arrayOf(
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ),
+                    permissionId
+                )
+            }
         }
     }
 
-    private fun isLocationPermissionIsAllow(context: Context): Boolean {
-        return ContextCompat.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
+    private fun isLocationPermissionIsAllow(fragment: Fragment): Boolean {
+        return fragment.context?.let {
+            ContextCompat.checkSelfPermission(
+                it,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        } == PackageManager.PERMISSION_GRANTED
+                && fragment.context?.let {
+                    ContextCompat.checkSelfPermission(
+                        it,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    )
+        } == PackageManager.PERMISSION_GRANTED
+
     }
 
     fun openLocationInAppSetting(context: Context) {

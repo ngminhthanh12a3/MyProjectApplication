@@ -1,5 +1,12 @@
 # MyProjectApplication
 
+## 1.7.0
+
+`10-04-2023`
+
+- Complete the Home Fragment.
+- Add date display on the Home Fragment.
+
 ## 1.6.0
 
 `09-04-2023`
