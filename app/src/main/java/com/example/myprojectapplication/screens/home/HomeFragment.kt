@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.watasolutions.week8_permission.services.location.LocationPermissionUtils
 import java.text.SimpleDateFormat
 
@@ -50,6 +51,10 @@ class HomeFragment : Fragment(), LocationPermissionUtils.LocationComponentListen
 
         lineChartHourlyForecast = binding.lineChartHourlyForecast
         // Inflate the layout for this fragment
+        val navBar = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+        if (navBar != null) {
+            navBar.visibility = View.VISIBLE
+        }
         return binding.root
     }
 
@@ -65,6 +70,7 @@ class HomeFragment : Fragment(), LocationPermissionUtils.LocationComponentListen
         super.onStart()
         getHomeData()
         locationPermissionUtils.setListener(this)
+        viewModel.setLocationClient(this)
     }
 
     private fun getHomeData() {

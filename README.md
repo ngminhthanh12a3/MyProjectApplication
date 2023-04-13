@@ -1,5 +1,13 @@
 # MyProjectApplication
 
+## 1.8.0
+
+`13-04-2023`
+
+- Create a model of daily forecast.
+- Make a Recycler View.
+- Create a navigation pane.
+
 ## 1.7.0
 
 `10-04-2023`

@@ -13,6 +13,7 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.myprojectapplication.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
  * A simple [Fragment] subclass.
@@ -32,6 +33,10 @@ class OnBoardingFragment : Fragment() {
         setOnboardingItems()
         setupIndicators()
         // Inflate the layout for this fragment
+        val navBar = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+        if (navBar != null) {
+            navBar.visibility = View.GONE
+        }
         return binding.root
     }
 

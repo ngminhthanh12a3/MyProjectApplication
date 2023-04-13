@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.myprojectapplication.screens.home.HomeFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -12,7 +13,7 @@ import com.google.android.gms.tasks.OnSuccessListener
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-class LocationClient(private val fragment: HomeFragment) {
+class LocationClient(private val fragment: Fragment) {
     private var fusedLocationClient: FusedLocationProviderClient? =
         fragment.context?.let { LocationServices.getFusedLocationProviderClient(it) }
     

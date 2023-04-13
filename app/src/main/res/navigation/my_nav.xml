@@ -12,11 +12,20 @@
         tools:layout="@layout/fragment_on_boarding" >
         <action
             android:id="@+id/action_onBoardingFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/navigation_home" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/navigation_home"
         android:name="com.example.myprojectapplication.screens.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_dailyFragment"
+            app:destination="@id/navigation_daily" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_daily"
+        android:name="com.example.myprojectapplication.screens.daily.DailyFragment"
+        android:label="fragment_daily"
+        tools:layout="@layout/fragment_daily" />
 </navigation>
