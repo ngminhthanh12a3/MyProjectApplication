@@ -1,5 +1,6 @@
 package com.example.myprojectapplication.screens.daily
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,20 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DailyViewHolder(private val binding: DailyItemBinding): RecyclerView.ViewHolder(binding.root) {
-    fun bindData(idol: DailyForecastListElement?) {
+    private lateinit var currentDailyForeCastElement: DailyForecastListElement
+    private lateinit var callback: OnDailyItemClick
+
+    init {
+        binding.root.setOnClickListener {
+            callback.onCLickItem(currentDailyForeCastElement)
+        }
+    }
+    @SuppressLint("SimpleDateFormat")
+    fun bindData(idol: DailyForecastListElement?, callback: OnDailyItemClick) {
+        this.callback = callback
+        if (idol != null) {
+            currentDailyForeCastElement = idol
+        }
         binding.dailyData = idol
         idol!!.dateFormatted = SimpleDateFormat("E, MMM d")
             .format(Date(idol.dt * 1000))

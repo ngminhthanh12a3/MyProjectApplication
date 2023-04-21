@@ -1,5 +1,11 @@
 # MyProjectApplication
 
+## 1.9.0
+
+`21-04-2023`
+
+- Set Daily View Item OnClick Event.
+
 ## 1.8.0
 
 `13-04-2023`

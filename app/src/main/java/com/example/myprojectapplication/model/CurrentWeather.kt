@@ -1,6 +1,8 @@
 package com.example.myprojectapplication.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class CurrentWeather(val coord: Coord,
                           val weather: List<Weather>,
@@ -46,12 +48,13 @@ data class Sys (
     val sunset: Long
 )
 
+@Parcelize
 data class Weather (
     val id: Long,
     val main: String,
     val description: String,
     val icon: String
-)
+) : Parcelable
 
 data class Wind (
     val speed: Double,

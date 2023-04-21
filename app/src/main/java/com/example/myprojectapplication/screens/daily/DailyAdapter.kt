@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.myprojectapplication.model.DailyForecastListElement
 
-class DailyAdapter: ListAdapter<DailyForecastListElement, DailyViewHolder>(DailyDiffUtil()) {
+class DailyAdapter(private val callback: OnDailyItemClick) : ListAdapter<DailyForecastListElement, DailyViewHolder>(DailyDiffUtil()) {
     class DailyDiffUtil:  DiffUtil.ItemCallback<DailyForecastListElement>() {
         override fun areItemsTheSame(oldItem: DailyForecastListElement, newItem: DailyForecastListElement): Boolean {
             return oldItem.dt == newItem.dt
@@ -23,7 +23,7 @@ class DailyAdapter: ListAdapter<DailyForecastListElement, DailyViewHolder>(Daily
 
     override fun onBindViewHolder(holder: DailyViewHolder, position: Int) {
         val idol = getItem(position)
-        holder.bindData(idol)
+        holder.bindData(idol, callback)
     }
 
 }

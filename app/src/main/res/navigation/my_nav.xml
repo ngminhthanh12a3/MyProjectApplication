@@ -27,5 +27,13 @@
         android:id="@+id/navigation_daily"
         android:name="com.example.myprojectapplication.screens.daily.DailyFragment"
         android:label="fragment_daily"
-        tools:layout="@layout/fragment_daily" />
+        tools:layout="@layout/fragment_daily" >
+        <action
+            android:id="@+id/action_navigation_daily_to_dailyItemFragment"
+            app:destination="@id/dailyItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyItemFragment"
+        android:name="com.example.myprojectapplication.screens.DailyItemFragment"
+        android:label="DailyItemFragment" />
 </navigation>

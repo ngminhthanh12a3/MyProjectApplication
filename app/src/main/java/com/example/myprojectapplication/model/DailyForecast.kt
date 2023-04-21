@@ -1,6 +1,8 @@
 package com.example.myprojectapplication.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class DailyForecast(val city: DailyForecastCity,
                          val cod: String,
@@ -17,6 +19,7 @@ data class DailyForecastCity (
     val timezone: Long
 )
 
+@Parcelize
 data class DailyForecastListElement (
     val dt: Long,
     val sunrise: Long,
@@ -34,15 +37,17 @@ data class DailyForecastListElement (
     val pop: Double,
     val rain: Double,
     var dateFormatted: String = ""
-)
+) : Parcelable
 
+@Parcelize
 data class FeelsLike (
     val day: Double,
     val night: Double,
     val eve: Double,
     val morn: Double
-)
+) : Parcelable
 
+@Parcelize
 data class Temp (
     val day: Double,
     val min: Double,
@@ -50,4 +55,4 @@ data class Temp (
     val night: Double,
     val eve: Double,
     val morn: Double
-)
+) : Parcelable
