@@ -1,5 +1,11 @@
 # MyProjectApplication
 
+## 1.9.1
+
+`21-04-2023`
+
+- Fix Chart in Home Fragment not auto update.
+
 ## 1.9.0
 
 `21-04-2023`

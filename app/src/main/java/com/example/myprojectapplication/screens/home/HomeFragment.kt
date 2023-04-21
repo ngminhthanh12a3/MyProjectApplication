@@ -131,6 +131,7 @@ class HomeFragment : Fragment(), LocationPermissionUtils.LocationComponentListen
                 lineChartHourlyForecast.axisLeft.textColor = Color.WHITE
                 lineChartHourlyForecast.axisRight.textColor = Color.WHITE
                 lineChartHourlyForecast.invalidate()
+                lineChartHourlyForecast.animate()
 
             }
 
